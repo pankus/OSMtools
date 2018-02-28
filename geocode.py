@@ -6,7 +6,7 @@ Created on Sun Feb 18 00:49:36 2018
 @author: nilsnolde
 """
 
-from OSMtools import convert
+from OSMtools import convert, exceptions
 
 def reverse_geocode(client, point_in):
     params = dict()
@@ -15,8 +15,10 @@ def reverse_geocode(client, point_in):
     
     try:
         response = client.request('/geocoding', params)['features'][0]
+    except exceptions.ApiError:
+        raise exceptions.ApiError
     except:
-        raise #ValueError("Your input coordinates are invalid for geocoding.")
+        raise
     
     response_dict = dict()
     
