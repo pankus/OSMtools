@@ -210,7 +210,7 @@ class directions:
                 
                 # If features are selected, calculate with those
                 if layer.selectedFeatureCount() == 0:
-                    feats = layer.getFeatures()
+                    feats = list(layer.getFeatures())
                 else:
                     feats = layer.selectedFeatures()
                     
