@@ -210,17 +210,18 @@ class directions:
                 
                 # If features are selected, calculate with those
                 if layer.selectedFeatureCount() == 0:
-                    feats = layer.getFeatures()
+                    feats = list(layer.getFeatures())
                 else:
-                    feats = layer.selectedFeatures()
+                    feats = list(layer.getSelectedFeatures())
+                    
                     
                 # Get features
                 point_geom = [feat.geometry().asPoint() for feat in feats]
                 
                 # Find field combo box
                 field_combo = [combo for combo in all_combos if combo.objectName().endswith('layer_id')][0] 
-                field_id = layer.fields().lookupField(field_combo.currentText())
-                field_values = [feat[field_id] for feat in feats]
+                attr_id = layer.fields().lookupField(field_combo.currentText())
+                field_values = [feat.attribute(attr_id) for feat in feats]
                 
             else:
                 parent_widget = radio_button.parentWidget()
