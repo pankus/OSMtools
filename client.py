@@ -183,15 +183,15 @@ class Client(object):
         :rtype: dict from JSON
         """
         body = response.json()
-        error = body.get('error')
         status_code = response.status_code
         
         if status_code == 429:
             raise exceptions._OverQueryLimit(
-                str(status_code), error)
+                str(status_code), body)
         if status_code != 200:
+            self.iface.messageBar().pushCritical(str(status_code), str(body))
             raise exceptions.ApiError(status_code,
-                                      error['message'])
+                                      body)
 
         return body
 

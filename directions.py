@@ -146,7 +146,7 @@ class directions:
         """
         :param responses: Collection of HTTP responses.
         :type responses: list
-        
+        raise exceptions.ApiError("Your input coordinates are invalid for geocoding.")
         :param values_list: List of feature ID's.
         :type values_list: list
         
