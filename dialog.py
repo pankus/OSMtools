@@ -61,6 +61,13 @@ units = ['time', 'distance']
 # For matrix API only
 metrics =['duration', 'distance', 'distance|duration'] 
 
+# For places API only
+req_type = ['pois', 'category_stats', 'category_list']
+sort_by = ['category', 'distance']
+wheelchair = ['','yes', 'designated', 'limited', 'no']
+smoking = ['','yes','dedicated','separated','isolated', 'outside', 'no']
+fees = ['','yes','no']
+
 class OSMtoolsDialog(QDialog, FORM_CLASS):
     def __init__(self, iface):
         """Constructor."""
@@ -100,11 +107,24 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
 #        self.matrix_metric_combo.addItems(metrics)
         self.route_pref_combo.addItems(preferences)
         self.access_unit_combo.addItems(units)
+        self.places_request_combo.addItems(req_type)
+        self.places_sort_combo.addItems(sort_by)
+        self.places_smoke.addItems(smoking)
+        self.places_wheel.addItems(wheelchair)
+        self.places_fees.addItems(fees)
         
         #### Set up signals/slots ####
         
         # API key text line
         self.api_key_dlg.textChanged.connect(self._keyWriter)
+        
+        # Places tab
+        self.places_point_button.clicked.connect(self._initMapTool)
+        self.places_poly_button.clicked.connect(self._initMapTool)
+        self.places_bbox_button.clicked.connect(self._initMapTool)
+        self.places_buttongroup.buttonReleased[int].connect(self._mappingMethodChanged)
+        self.places_layer_refresh.clicked.connect(self._layerTreeChanged) 
+        self.places_layer_combo.currentIndexChanged[int].connect(self._layerSeletedChanged)
         
         # Matrix tab
         self.matrix_start_combo.currentIndexChanged.connect(self._layerSeletedChanged)
@@ -163,7 +183,8 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
                       self.end_layer_combo,
                       self.access_layer_combo,
                       self.matrix_start_combo,
-                      self.matrix_end_combo]
+                      self.matrix_end_combo,
+                      self.places_layer_combo]
 
         for box in comboboxes:
             old_text = box.currentText()
@@ -193,9 +214,11 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
                 for child in parent.findChildren((QComboBox, QPushButton)):
                     child.setEnabled(False)
         
-        condition = self.end_layer_radio.isChecked() and self.start_layer_radio.isChecked()
-        self.row_by_row.setEnabled(condition)
-        self.many_by_many.setEnabled(condition)
+        # Places can also call this
+        if parent_widget_name.startswith('route'):
+            condition = self.end_layer_radio.isChecked() and self.start_layer_radio.isChecked()
+            self.row_by_row.setEnabled(condition)
+            self.many_by_many.setEnabled(condition)
         
         
     def _layerSeletedChanged(self, index):
@@ -266,7 +289,7 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
         :param button: Button name which intialized mapTool.
         :param button: str
         """
-        
+        print(point)
         x, y = point
         
         if button == self.start_map_button.objectName():

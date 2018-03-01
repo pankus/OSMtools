@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
+    <width>430</width>
     <height>687</height>
    </rect>
   </property>
@@ -108,7 +108,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="usesScrollButtons">
       <bool>true</bool>
@@ -127,8 +127,8 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-169</y>
-            <width>340</width>
+            <y>0</y>
+            <width>368</width>
             <height>852</height>
            </rect>
           </property>
@@ -206,7 +206,7 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
               <item row="0" column="0">
-               <widget class="QWidget" name="widget_8" native="true">
+               <widget class="QWidget" name="route_map" native="true">
                 <layout class="QGridLayout" name="gridLayout_10" columnstretch="1,0">
                  <property name="topMargin">
                   <number>6</number>
@@ -263,7 +263,7 @@
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QWidget" name="widget_9" native="true">
+               <widget class="QWidget" name="route_layer" native="true">
                 <layout class="QGridLayout" name="gridLayout_11" columnstretch="1,0">
                  <property name="topMargin">
                   <number>6</number>
@@ -1335,6 +1335,286 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>POI</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>-144</y>
+            <width>357</width>
+            <height>601</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="2" column="0">
+            <widget class="QGroupBox" name="groupBox_6">
+             <property name="title">
+              <string>Geometry</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0" colspan="2">
+               <widget class="QWidget" name="places_map" native="true">
+                <layout class="QGridLayout" name="gridLayout_20">
+                 <property name="leftMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>9</number>
+                 </property>
+                 <item row="4" column="0">
+                  <widget class="QRadioButton" name="places_poly_radio">
+                   <property name="text">
+                    <string>From Rectangle</string>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">places_buttongroup</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QRadioButton" name="places_point_radio">
+                   <property name="text">
+                    <string>From Point</string>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">places_buttongroup</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QPushButton" name="places_poly_button">
+                   <property name="text">
+                    <string>Map Rect</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QPushButton" name="places_point_button">
+                   <property name="text">
+                    <string>Map Point</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QWidget" name="places_layer" native="true">
+                <layout class="QGridLayout" name="gridLayout_21">
+                 <item row="0" column="0">
+                  <widget class="QRadioButton" name="places_layer_radio">
+                   <property name="text">
+                    <string>From Layer</string>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">places_buttongroup</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QComboBox" name="places_layer_combo">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="toolTip">
+                    <string>Input Layer must be of type 'Point' </string>
+                   </property>
+                   <property name="whatsThis">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" colspan="3">
+                  <widget class="QComboBox" name="places_layer_id">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_19">
+                   <property name="text">
+                    <string>Select Unique ID field</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QPushButton" name="places_layer_refresh">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>Refresh List</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QWidget" name="widget_13" native="true">
+             <layout class="QGridLayout" name="gridLayout_18">
+              <item row="0" column="1">
+               <widget class="QComboBox" name="places_request_combo"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Request</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QWidget" name="widget_25" native="true">
+             <layout class="QGridLayout" name="gridLayout_23">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Sort By</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="places_sort_combo"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QWidget" name="widget_22" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Bounding Box</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="places_bbox_button">
+                <property name="text">
+                 <string>Map Rect</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QWidget" name="widget_23" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Buffer [m]</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBox"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>Limit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBox_2"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="groupBox_7">
+             <property name="title">
+              <string>Filters</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_22">
+              <item row="2" column="3">
+               <widget class="QComboBox" name="places_smoke"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_20">
+                <property name="text">
+                 <string>Venue ID's</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_22">
+                <property name="text">
+                 <string>Smoking</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_21">
+                <property name="text">
+                 <string>Wheelchair</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="places_wheel"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_23">
+                <property name="text">
+                 <string>Fee</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="places_fees"/>
+              </item>
+              <item row="0" column="1" colspan="3">
+               <widget class="QLineEdit" name="places_venue"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>Group ID's</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1" colspan="3">
+               <widget class="QLineEdit" name="places_group"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -1418,5 +1698,6 @@
  <buttongroups>
   <buttongroup name="start_buttongroup"/>
   <buttongroup name="end_buttongroup"/>
+  <buttongroup name="places_buttongroup"/>
  </buttongroups>
 </ui>
