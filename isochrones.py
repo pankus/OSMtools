@@ -103,7 +103,10 @@ class isochrones:
             # Define the mapped point
             coords = [float(x) for x in self.dlg.access_map_label.text().split('\n')[:2]]
             in_point_geom = QgsPoint(*coords)
-            response_dict = geocode.reverse_geocode(self.client, in_point_geom)
+            try:
+                response_dict = geocode.reverse_geocode(self.client, in_point_geom)
+            except:
+                raise
             
             self.params['locations'] = convert._build_coords(coords)
             

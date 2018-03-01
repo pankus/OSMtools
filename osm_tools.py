@@ -157,4 +157,5 @@ class OSMtools():
             except Exception:
                 raise
             finally:
+                QApplication.restoreOverrideCursor()
                 self.dlg.close()
