@@ -127,7 +127,10 @@ class directions:
             
             # Make the request
             self.params['coordinates'] = convert._build_coords(coords_tuple)
-            responses.append(self.client.request(self.url, self.params))
+            try:
+                responses.append(self.client.request(self.url, self.params))
+            except:
+                raise
         
         # Delete entries in values_list where coords where the same
         values_list = [value for idx, value in enumerate(values_list) if idx not in delete_values]
@@ -207,7 +210,7 @@ class directions:
                 # Check CRS and transform if necessary
                 auxiliary.checkCRS(layer,
                              self.iface.messageBar())
-                
+                             
                 # If features are selected, calculate with those
                 if layer.selectedFeatureCount() == 0:
                     feats = list(layer.getFeatures())

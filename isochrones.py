@@ -108,7 +108,10 @@ class isochrones:
             self.params['locations'] = convert._build_coords(coords)
             
             # Fire request
-            response = self.client.request(self.url, self.params)
+            try:
+                response = self.client.request(self.url, self.params)
+            except:
+                raise
             
             out_point_geom = QgsPointXY(*response['features'][0]['properties']['center'])
             

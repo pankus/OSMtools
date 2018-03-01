@@ -15,8 +15,6 @@ def reverse_geocode(client, point_in):
     
     try:
         response = client.request('/geocoding', params)['features'][0]
-    except exceptions.ApiError:
-        raise exceptions.ApiError("Your input coordinates are invalid for geocoding.")
     except:
         raise
     

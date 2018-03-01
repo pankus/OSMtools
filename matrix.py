@@ -89,7 +89,10 @@ class matrix:
         self.params['locations'] = locations_list
         self.params['sources'] = sources
         self.params['destinations'] = destinations
-        response = self.client.request(self.url, {}, post_json=self.params)
+        try:
+            response = self.client.request(self.url, {}, post_json=self.params)
+        except:
+            raise
         
         
         durations = [item for sublist in response['durations'] for item in sublist]
