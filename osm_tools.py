@@ -149,8 +149,7 @@ class OSMtools():
             
             except (exceptions._OverQueryLimit,
                     exceptions.ApiError,
-                    exceptions.TransportError,
-                    exceptions._OverQueryLimit) as e:
+                    exceptions.TransportError) as e:
                 self.iface.messageBar().pushCritical("{}: ".format(type(e)),
                                                       "{}".format(str(e)))
             

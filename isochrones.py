@@ -92,7 +92,10 @@ class isochrones:
                 
                 # Get response
                 self.params['locations'] = convert._build_coords(coords)
-                responses.append(self.client.request(self.url, self.params))
+                try:
+                    responses.append(self.client.request(self.url, self.params))
+                except:
+                    raise
                 
             poly_out = self._addPolygon(responses, layer_name)
             

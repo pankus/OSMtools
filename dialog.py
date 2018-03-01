@@ -283,8 +283,13 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
             
         if button == self.access_map_button.objectName():
             clt = client.Client(self.iface)
-            loc_dict = geocode.reverse_geocode(clt,
-                                              point)
+            try:
+                loc_dict = geocode.reverse_geocode(clt,
+                                                   point)
+            except:
+                self.mapTool.canvasClicked.disconnect()
+                QApplication.restoreOverrideCursor()
+                raise
             
             out_str = u"{0:.6f}\n{1:.6f}\n{2}\n{3}\n{4}".format(loc_dict.get('Lon', ""),
                                                             loc_dict.get('Lat', ""),
