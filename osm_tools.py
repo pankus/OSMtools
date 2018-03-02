@@ -34,7 +34,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction, QApplication
 
 from OSMtools.dialog import OSMtoolsDialog
-from . import isochrones, client, directions, exceptions, matrix
+from . import isochrones, client, directions, exceptions, matrix, places
 
 import logging
 
@@ -134,6 +134,9 @@ class OSMtools():
             try:
                 clt = client.Client(self.iface)
                 
+                if self.dlg.tabWidget.currentIndex() == 3:
+                    m = places.places(self.dlg, clt, self.iface)
+                    m.places_calc()
                 if self.dlg.tabWidget.currentIndex() == 2:
                     m = matrix.matrix(self.dlg, clt, self.iface)
                     m.matrix_calc()

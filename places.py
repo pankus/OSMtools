@@ -23,11 +23,11 @@ from qgis.core import (QgsVectorLayer,
                        QgsProject
                        )
 
-from . import convert, geocode, auxiliary
+from . import convert, geocode, auxiliary, pointtool
 
 class places:
     """
-    Performs requests to the ORS directions API.
+    Performs requests to the ORS places API.
     """
     def __init__(self, dlg, client, iface):
         """
@@ -45,12 +45,17 @@ class places:
         self.iface = iface
         
         self.url = '/places'        
+        self.mapTool = pointtool.RectangleMapTool(self.iface.mapCanvas())
         
-        self.params = {'profile': self.route_mode,
-                    'preference': self.route_pref,
-                    'geometry': 'true',
-                    'geometry_format': 'geojson',
-                    'instructions': 'false'
-                    }
+#        self.params = {'profile': self.route_mode,
+#                    'preference': self.route_pref,
+#                    'geometry': 'true',
+#                    'geometry_format': 'geojson',
+#                    'instructions': 'false'
+#                    }
         
+    def places_calc(self):
+        """
+        Performs requests to the ORS places API.
+        """
         

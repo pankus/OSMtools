@@ -38,7 +38,7 @@ from qgis.core import (QgsProject,
                        )
 
 from . import pointtool, geocode, auxiliary, client, exceptions
-
+ 
 FORM_CLASS, _ = loadUiType(os.path.join(
     os.path.dirname(__file__), 'osm_tools_dialog_base.ui'))
 
@@ -273,9 +273,16 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
         
         self.setWindowState(Qt.WindowMinimized)
         sending_button = self.sender().objectName()
-        self.mapTool = pointtool.PointTool(self.iface.mapCanvas(), sending_button)        
+        if not sending_button.startswith('places'):
+            self.mapTool = pointtool.PointTool(self.iface.mapCanvas(), sending_button)
+            self.mapTool.canvasClicked.connect(self._writeCoordinateLabel)
+        else:
+            self.mapTool = pointtool.RectangleMapTool(self.iface.mapCanvas())
+            #TODO: Connect mapTool to a method to process coords. Maybe the solution
+            #is to follow noerw's example and consequently separate GUI and processing
+            #for each and every API, and keep one small dialog.py
+        
         self.iface.mapCanvas().setMapTool(self.mapTool)
-        self.mapTool.canvasClicked.connect(self._writeCoordinateLabel)
         
         
     # Write map coordinates to text fields
@@ -289,7 +296,6 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
         :param button: Button name which intialized mapTool.
         :param button: str
         """
-        print(point)
         x, y = point
         
         if button == self.start_map_button.objectName():
@@ -321,5 +327,6 @@ class OSMtoolsDialog(QDialog, FORM_CLASS):
         
         # Restore normal behavior
         self.showNormal()
+        QApplication.restoreOverrideCursor()
         self.mapTool.canvasClicked.disconnect()
         
