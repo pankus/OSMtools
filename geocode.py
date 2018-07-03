@@ -10,11 +10,11 @@ from OSMtools import convert
 
 def reverse_geocode(client, point_in):
     params = dict()
-    point_in_list = convert._comma_list([point_in.x(), point_in.y()])
-    params['location'] = point_in_list
+    params['point.lat'] = point_in.y()
+    params['point.lon'] = point_in.x()
     
     try:
-        response = client.request('/geocoding', params)['features'][0]
+        response = client.request('/geocode/reverse', params)['features'][0]
     except:
         raise #ValueError("Your input coordinates are invalid for geocoding.")
     
